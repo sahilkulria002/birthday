@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Happy Birthday</title>
+    <style>
+        body {
+            background-color: #ffcccc;
+            background-image: url('img1.jpg');
+            background-size: cover;
+            background-position: top;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 10em;
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(90deg,rgba(255,0,0,0.1), rgb(9, 232, 61), rgb(255,0,20), rgb(8, 16, 229), rgba(255,0,0,0.1));
+            background-repeat: no-repeat;
+            animation: rainbow 3s ease infinite;
+            background-size: 80%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgba(255,0,0,0.1);
+            /* text-shadow: 2px 2px #333; */
+            /* animation: rainbow 2s ease infinite; */
+            /* -webkit-background-clip: text; */
+            /* background-clip: text; */
+            /* -webkit-text-fill-color: transparent; */
+            /* color: transparent; */
+        }
+
+        .heart {
+            width: 25vw;
+            /* Set the width of the image */
+            height: auto;
+            /* Set the height of the image to maintain aspect ratio */
+            position: absolute;
+        }
+
+        @keyframes rainbow {
+            0% {
+                background-image: linear-gradient(to right, #ee0979, #ff6a00);
+            }
+
+            25% {
+                background-image: linear-gradient(to right, #ff6a00, #ffc200);
+            }
+
+            50% {
+                background-image: linear-gradient(to right, #ffc200, #33cc33);
+            }
+
+            75% {
+                background-image: linear-gradient(to right, #33cc33, #0077be);
+            }
+
+            100% {
+                background-image: linear-gradient(to right, #0077be, #ee0979);
+            }
+        }
+    .theele {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #text {
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+        font-size: 20vw;
+        font-weight: 1000;
+        position: absolute;
+        font-family: 'Arial', sans-serif; /* change the font family */
+        color: rgb(73, 11, 11);
+      }
+    
+    </style>
+</head>
+
+<body>
+    <div class="theele">
+        <h1>Happy Birthday  .  from your   .  Family</h1>
+        
+        <audio controls loop>
+            <source src="song.mp3" type="audio/mpeg" >
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div id="text"></div>
+
+<script>
+  setInterval(function () {
+    document.getElementById("text").innerHTML = "The <br><br><br> Boss<br> <br><br>.";
+    setTimeout(function () {
+      document.getElementById("text").innerHTML = "";
+    }, 25);
+  }, 5000);
+</script>
+    <script>
+        // Define a function to create a new heart element
+        function createHeart() {
+            var heart = document.createElement("img");
+            heart.classList.add("heart");
+            heart.src = "sticker.png";
+            // Set initial position
+            var x = Math.floor(Math.random() * window.innerWidth);
+            var y = Math.floor(Math.random() * window.innerHeight);
+            heart.style.left = x + "px";
+            heart.style.top = y + "px";
+
+            // Generate random direction
+            var dx = Math.floor(Math.random() * 11) - 5;
+            var dy = Math.floor(Math.random() * 11) - 5;
+
+            // Update position every 10ms
+            setInterval(function () {
+                // Get current position
+                var x = parseInt(heart.style.left);
+                var y = parseInt(heart.style.top);
+
+                // Update position
+                heart.style.left = (x + dx) + "px";
+                heart.style.top = (y + dy) + "px";
+
+                // Check if touching left or right edges
+                if (x < 0) {
+                    dx = Math.abs(dx);
+                }
+                if (x > document.documentElement.clientWidth - heart.width - 10) {
+                    dx = -Math.abs(dx);
+                }
+
+                // Check if touching top or bottom edges
+                if (y < 0) {
+                    dy = Math.abs(dy);
+                }
+                if (y > document.documentElement.clientHeight - heart.height) {
+                    dy = -Math.abs(dy);
+                }
+            }, 10);
+
+            return heart;
+        }
+
+        // Create 5 hearts and add them to the page
+        for (var i = 0; i < 10; i++) {
+            var heart = createHeart();
+            document.body.appendChild(heart);
+        }
+
+        // Update image size and position on screen orientation change
+        window.addEventListener("orientationchange", function () {
+            setTimeout(function () {
+                var hearts = document.querySelectorAll(".heart");
+                hearts.forEach(function (heart) {
+                    var x = Math.floor(Math.random() * window.innerWidth);
+                    var y = Math.floor(Math.random() * window.innerHeight);
+                    heart.style.left = x + "px";
+                    heart.style.top = y + "px";
+                    heart.style.width = "10vw";
+                });
+            }, 1000);
+        });
+    </script>
+
+<script>
+    var images = ['img1.jpg', 'img2.jpg', 'img3.jpg'];
+    // Define an array of image filenames
+
+    var currentIndex = 0;
+    // Initialize the current index to 0 (the first image)
+
+    setInterval(function() {
+        // Run this function every 4 seconds
+        currentIndex = (currentIndex + 1) % images.length;
+        // Increment the current index and wrap it back to 0 if it exceeds the length of the array
+        document.body.style.backgroundImage = 'url(' + images[currentIndex] + ')';
+        // Set the new background image based on the current index
+    }, 4000);
+</script>
+</body>
+
+</html>
